@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crosspost Storm</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand: #a3e635;
+      --bg: #141418;
+      --bg-card: #1e1e28;
+      --fg: #ffffff;
+      --fg-muted: #89898f;
+      --border: #53525d;
+      --chart-blue: #5d5ce6;
+      --chart-cyan: #6dd5ff;
+      --chart-pink: #ff5ecc;
+      --chart-orange: #ffa500;
+    }
+
+    .reveal-viewport {
+      background: var(--bg);
+    }
+
+    .reveal {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--fg);
+    }
+
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      text-transform: none;
+      letter-spacing: -0.03em;
+      color: var(--fg);
+    }
+
+    .reveal h1 { font-size: 3.2em; line-height: 1.05; }
+    .reveal h2 { font-size: 2.2em; line-height: 1.1; }
+    .reveal h3 { font-size: 1.4em; font-weight: 600; }
+
+    .reveal p, .reveal li {
+      font-weight: 400;
+      font-size: 0.85em;
+      line-height: 1.6;
+      color: #d4d4db;
+    }
+
+    .reveal ul { list-style: none; padding-left: 0; }
+    .reveal ul li { padding: 0.35em 0; padding-left: 1.5em; position: relative; }
+    .reveal ul li::before {
+      content: '▸';
+      color: var(--brand);
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+    }
+
+    .brand { color: var(--brand); }
+    .muted { color: var(--fg-muted); font-weight: 400; }
+
+    /* Title slide */
+    .title-slide h1 {
+      font-size: 4em;
+      margin-bottom: 0.1em;
+    }
+    .title-slide .subtitle {
+      font-size: 1.1em;
+      color: var(--fg-muted);
+      font-weight: 400;
+      margin-top: 0;
+    }
+    .title-slide .authors {
+      margin-top: 1.5em;
+      font-size: 0.8em;
+      color: var(--brand);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .title-slide .date {
+      font-size: 0.65em;
+      color: var(--fg-muted);
+      margin-top: 0.5em;
+    }
+
+    /* Decorative line */
+    .divider {
+      width: 80px;
+      height: 4px;
+      background: var(--brand);
+      border-radius: 2px;
+      margin: 0.8em auto;
+    }
+
+    /* Cards grid */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1em;
+      margin-top: 1em;
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.3em;
+      text-align: left;
+    }
+    .card h4 {
+      font-size: 0.85em;
+      font-weight: 700;
+      margin: 0 0 0.4em 0;
+      color: var(--brand);
+    }
+    .card p {
+      font-size: 0.65em;
+      margin: 0;
+      color: #d4d4db;
+      line-height: 1.5;
+    }
+
+    /* Icon labels */
+    .icon-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      background: rgba(163, 230, 53, 0.08);
+      border: 1px solid rgba(163, 230, 53, 0.2);
+      border-radius: 8px;
+      padding: 0.3em 0.8em;
+      font-size: 0.7em;
+      color: var(--brand);
+      font-weight: 600;
+      margin: 0.2em;
+    }
+
+    /* Platform pills */
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6em;
+      justify-content: center;
+      margin-top: 1em;
+    }
+    .pill {
+      display: inline-block;
+      padding: 0.5em 1.2em;
+      border-radius: 999px;
+      font-size: 0.7em;
+      font-weight: 600;
+      color: var(--fg);
+      border: 1px solid transparent;
+    }
+    .pill-twitter { background: rgba(93, 92, 230, 0.2); border-color: rgba(93, 92, 230, 0.4); color: #8b8aef; }
+    .pill-linkedin { background: rgba(109, 213, 255, 0.15); border-color: rgba(109, 213, 255, 0.35); color: #6dd5ff; }
+    .pill-bluesky { background: rgba(163, 230, 53, 0.12); border-color: rgba(163, 230, 53, 0.3); color: var(--brand); }
+    .pill-reddit { background: rgba(255, 94, 204, 0.15); border-color: rgba(255, 94, 204, 0.35); color: #ff5ecc; }
+    .pill-mastodon { background: rgba(255, 165, 0, 0.15); border-color: rgba(255, 165, 0, 0.35); color: #ffa500; }
+
+    /* Flow diagram */
+    .flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6em;
+      margin: 1.2em 0;
+      flex-wrap: wrap;
+    }
+    .flow-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.7em 1.2em;
+      font-size: 0.7em;
+      font-weight: 600;
+      color: var(--fg);
+    }
+    .flow-box.highlight {
+      border-color: var(--brand);
+      background: rgba(163, 230, 53, 0.08);
+      color: var(--brand);
+    }
+    .flow-arrow {
+      font-size: 1.2em;
+      color: var(--brand);
+      font-weight: 300;
+    }
+
+    /* Two-column layout */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2em;
+      text-align: left;
+      align-items: start;
+    }
+
+    /* Section number */
+    .section-num {
+      font-size: 5em;
+      font-weight: 900;
+      color: rgba(163, 230, 53, 0.1);
+      position: absolute;
+      top: 0.1em;
+      right: 0.3em;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    /* Big number stats */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 2em;
+      margin: 1em 0;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 2.5em;
+      font-weight: 900;
+      color: var(--brand);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.6em;
+      color: var(--fg-muted);
+      margin-top: 0.3em;
+      font-weight: 500;
+    }
+
+    /* CTA slide */
+    .cta-slide h2 {
+      font-size: 2.8em;
+    }
+    .cta-link {
+      display: inline-block;
+      margin-top: 1em;
+      padding: 0.6em 2em;
+      background: var(--brand);
+      color: var(--bg);
+      font-weight: 700;
+      font-size: 0.8em;
+      border-radius: 999px;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    /* Fragment animations */
+    .reveal .slides section .fragment.custom-grow {
+      opacity: 1;
+      transform: scale(0.95);
+      transition: all 0.4s ease;
+    }
+    .reveal .slides section .fragment.custom-grow.visible {
+      transform: scale(1);
+    }
+
+    /* Override reveal defaults */
+    .reveal .slide-background { background: var(--bg); }
+    .reveal .controls { color: var(--brand); }
+    .reveal .progress span { background: var(--brand); }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: Title -->
+      <section class="title-slide">
+        <h1>Crosspost<br/><span class="brand">Storm</span></h1>
+        <div class="divider"></div>
+        <p class="subtitle">One post. Every platform. Zero friction.</p>
+        <p class="authors">Vladimir Vedernikov &amp; Gabriel Comte</p>
+        <p class="date">April 15, 2026</p>
+      </section>
+
+      <!-- SLIDE 2: The Problem -->
+      <section>
+        <span class="section-num">01</span>
+        <h2>The <span class="brand">Problem</span></h2>
+        <div class="divider"></div>
+        <div class="cards">
+          <div class="card">
+            <h4>Time Sink</h4>
+            <p>Manually reformatting and posting the same content across 5+ platforms eats hours every week.</p>
+          </div>
+          <div class="card">
+            <h4>Inconsistency</h4>
+            <p>Each platform has different character limits, media rules, and formatting — posts drift apart.</p>
+          </div>
+          <div class="card">
+            <h4>Missed Reach</h4>
+            <p>Delayed or forgotten crossposts mean lost engagement during the critical first-hour window.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: The Solution -->
+      <section>
+        <span class="section-num">02</span>
+        <h2>The <span class="brand">Solution</span></h2>
+        <div class="divider"></div>
+        <p style="margin-bottom: 0.5em;">Crosspost Storm automatically adapts and publishes your content everywhere — simultaneously.</p>
+        <div class="flow">
+          <div class="flow-box">Write Once</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-box highlight">Crosspost Storm</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-box">All Platforms</div>
+        </div>
+        <div class="pills">
+          <span class="pill pill-twitter">𝕏 / Twitter</span>
+          <span class="pill pill-linkedin">LinkedIn</span>
+          <span class="pill pill-bluesky">Bluesky</span>
+          <span class="pill pill-reddit">Reddit</span>
+          <span class="pill pill-mastodon">Mastodon</span>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: How It Works -->
+      <section>
+        <span class="section-num">03</span>
+        <h2>How It <span class="brand">Works</span></h2>
+        <div class="divider"></div>
+        <div class="two-col">
+          <div>
+            <ul>
+              <li>Compose your post in a single unified editor</li>
+              <li>Platform-aware content adaptation (length, hashtags, mentions)</li>
+              <li>Media transcoding &amp; resizing per platform specs</li>
+              <li>Scheduled or instant publishing</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li>Thread splitting for long-form content</li>
+              <li>Preview exactly what each platform will show</li>
+              <li>Analytics aggregated across all channels</li>
+              <li>API-first design — integrate with any workflow</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: Key Features -->
+      <section>
+        <span class="section-num">04</span>
+        <h2>Key <span class="brand">Features</span></h2>
+        <div class="divider"></div>
+        <div class="cards" style="grid-template-columns: 1fr 1fr;">
+          <div class="card">
+            <h4>Smart Adaptation</h4>
+            <p>AI-powered content reformatting that respects each platform's culture and constraints.</p>
+          </div>
+          <div class="card">
+            <h4>Unified Analytics</h4>
+            <p>See engagement, reach, and growth across all platforms in one dashboard.</p>
+          </div>
+          <div class="card">
+            <h4>Scheduling Engine</h4>
+            <p>Optimal timing per platform. Queue posts or publish instantly with one click.</p>
+          </div>
+          <div class="card">
+            <h4>Team Workflows</h4>
+            <p>Approval chains, draft sharing, and role-based access for teams of any size.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: Architecture -->
+      <section>
+        <span class="section-num">05</span>
+        <h2><span class="brand">Architecture</span></h2>
+        <div class="divider"></div>
+        <div class="flow" style="flex-direction: column; gap: 0.8em;">
+          <div class="flow" style="margin: 0;">
+            <div class="flow-box">Client App</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box highlight">API Gateway</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box">Queue</div>
+          </div>
+          <span class="flow-arrow" style="font-size: 1.5em;">↓</span>
+          <div class="flow" style="margin: 0;">
+            <div class="flow-box">Platform Adapters</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box highlight">Delivery Engine</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-box">Analytics Store</div>
+          </div>
+        </div>
+        <p class="muted" style="font-size: 0.6em; margin-top: 1em;">Event-driven microservices · Horizontally scalable · Platform adapters are plug-and-play</p>
+      </section>
+
+      <!-- SLIDE 7: Impact / Numbers -->
+      <section>
+        <span class="section-num">06</span>
+        <h2>Why It <span class="brand">Matters</span></h2>
+        <div class="divider"></div>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-value">5x</div>
+            <div class="stat-label">Faster Publishing</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">100%</div>
+            <div class="stat-label">Platform Consistency</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Missed Windows</div>
+          </div>
+        </div>
+        <p class="muted" style="font-size: 0.7em;">Spend time creating content, not distributing it.</p>
+      </section>
+
+      <!-- SLIDE 8: Roadmap -->
+      <section>
+        <span class="section-num">07</span>
+        <h2><span class="brand">Roadmap</span></h2>
+        <div class="divider"></div>
+        <div class="two-col">
+          <div>
+            <h3 class="brand" style="font-size: 0.85em;">Now</h3>
+            <ul>
+              <li>Core crossposting engine</li>
+              <li>𝕏, LinkedIn, Bluesky support</li>
+              <li>Unified composer UI</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="brand" style="font-size: 0.85em;">Next</h3>
+            <ul>
+              <li>Reddit &amp; Mastodon adapters</li>
+              <li>Analytics dashboard</li>
+              <li>Team collaboration features</li>
+              <li>Browser extension</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: Thank You / CTA -->
+      <section class="cta-slide">
+        <h2>Let's <span class="brand">Storm</span><br/>the Platforms</h2>
+        <div class="divider"></div>
+        <p class="muted" style="font-size: 0.8em;">Vladimir Vedernikov &amp; Gabriel Comte</p>
+        <p class="muted" style="font-size: 0.65em; margin-top: 1.5em;">Questions?</p>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      transition: 'slide',
+      transitionSpeed: 'default',
+      backgroundTransition: 'fade',
+      center: true,
+      plugins: [RevealHighlight],
+      width: 1280,
+      height: 720,
+    });
+  </script>
+</body>
+</html>
