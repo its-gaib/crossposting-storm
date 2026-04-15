@@ -39,13 +39,13 @@
       color: var(--fg);
     }
 
-    .reveal h1 { font-size: 2.4em; line-height: 1.05; }
-    .reveal h2 { font-size: 1.6em; line-height: 1.1; }
-    .reveal h3 { font-size: 1.1em; font-weight: 600; }
+    .reveal h1 { font-size: 1.8em; line-height: 1.05; }
+    .reveal h2 { font-size: 1.2em; line-height: 1.1; }
+    .reveal h3 { font-size: 0.85em; font-weight: 600; }
 
     .reveal p, .reveal li {
       font-weight: 400;
-      font-size: 0.7em;
+      font-size: 0.55em;
       line-height: 1.6;
       color: #d4d4db;
     }
@@ -60,29 +60,29 @@
       font-weight: 700;
     }
 
-    .brand { color: var(--brand); }
+    .brand, a.brand, .reveal a.brand { color: var(--brand) !important; text-decoration: none !important; }
     .muted { color: var(--fg-muted); font-weight: 400; }
 
     /* Title slide */
     .title-slide h1 {
-      font-size: 3em;
+      font-size: 2.2em;
       margin-bottom: 0.1em;
     }
     .title-slide .subtitle {
-      font-size: 0.85em;
+      font-size: 0.65em;
       color: var(--fg-muted);
       font-weight: 400;
       margin-top: 0;
     }
     .title-slide .authors {
       margin-top: 1.5em;
-      font-size: 0.65em;
+      font-size: 0.5em;
       color: var(--brand);
       font-weight: 600;
       letter-spacing: 0.02em;
     }
     .title-slide .date {
-      font-size: 0.55em;
+      font-size: 0.35em;
       color: var(--fg-muted);
       margin-top: 0.5em;
     }
@@ -111,13 +111,13 @@
       text-align: left;
     }
     .card h4 {
-      font-size: 0.7em;
+      font-size: 0.55em;
       font-weight: 700;
       margin: 0 0 0.4em 0;
       color: var(--brand);
     }
     .card p {
-      font-size: 0.55em;
+      font-size: 0.45em;
       margin: 0;
       color: #d4d4db;
       line-height: 1.5;
@@ -132,7 +132,7 @@
       border: 1px solid rgba(163, 230, 53, 0.2);
       border-radius: 8px;
       padding: 0.3em 0.8em;
-      font-size: 0.6em;
+      font-size: 0.5em;
       color: var(--brand);
       font-weight: 600;
       margin: 0.2em;
@@ -148,9 +148,9 @@
     }
     .pill {
       display: inline-block;
-      padding: 0.4em 1em;
+      padding: 0.3em 0.8em;
       border-radius: 999px;
-      font-size: 0.6em;
+      font-size: 0.5em;
       font-weight: 600;
       color: var(--fg);
       border: 1px solid transparent;
@@ -174,8 +174,8 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 0.5em 1em;
-      font-size: 0.6em;
+      padding: 0.4em 0.8em;
+      font-size: 0.5em;
       font-weight: 600;
       color: var(--fg);
     }
@@ -201,7 +201,7 @@
 
     /* Section number */
     .section-num {
-      font-size: 4em;
+      font-size: 3em;
       font-weight: 900;
       color: rgba(163, 230, 53, 0.1);
       position: absolute;
@@ -222,13 +222,13 @@
       text-align: center;
     }
     .stat-value {
-      font-size: 2em;
+      font-size: 1.6em;
       font-weight: 900;
       color: var(--brand);
       line-height: 1;
     }
     .stat-label {
-      font-size: 0.5em;
+      font-size: 0.4em;
       color: var(--fg-muted);
       margin-top: 0.3em;
       font-weight: 500;
@@ -236,7 +236,7 @@
 
     /* CTA slide */
     .cta-slide h2 {
-      font-size: 2em;
+      font-size: 1.5em;
     }
     .cta-link {
       display: inline-block;
