@@ -92,31 +92,34 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.3em;
-      margin: 1em auto 0.5em;
+      gap: 0;
+      margin: 0.8em auto 0.5em;
     }
-    .viz-phone {
-      flex-shrink: 0;
-    }
-    .viz-arrows {
-      flex-shrink: 0;
-    }
-    .viz-platforms {
+    .viz-side {
       display: flex;
       flex-direction: column;
-      gap: 0.5em;
+      gap: 0.8em;
+    }
+    .viz-center {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-shrink: 0;
     }
     .viz-platform {
       display: flex;
       align-items: center;
-      gap: 0.5em;
+      gap: 0.4em;
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 0.25em 0.7em;
+      padding: 0.2em 0.5em;
+    }
+    .viz-platform.compact {
+      padding: 0.15em 0.35em;
     }
     .viz-platform span {
-      font-size: 0.4em;
+      font-size: 0.38em;
       font-weight: 600;
       color: #d4d4db;
     }
@@ -312,39 +315,8 @@
         <p class="subtitle">Social media aggregators — let's make them support <a href="https://pubky.app" target="_blank" class="brand" style="text-decoration: none;">pubky.app</a></p>
         <!-- Cross-posting visualization -->
         <div class="crosspost-viz">
-          <div class="viz-phone">
-            <svg viewBox="0 0 60 100" width="48" height="80" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="2" y="2" width="56" height="96" rx="10" stroke="#89898f" stroke-width="2.5" fill="#1e1e28"/>
-              <rect x="8" y="14" width="44" height="64" rx="3" fill="#2a2a34"/>
-              <circle cx="30" cy="88" r="4" stroke="#89898f" stroke-width="1.5" fill="none"/>
-              <rect x="22" y="6" width="16" height="3" rx="1.5" fill="#53525d"/>
-              <!-- Post lines -->
-              <rect x="14" y="24" width="28" height="2.5" rx="1" fill="#a3e635" opacity="0.7"/>
-              <rect x="14" y="30" width="32" height="2" rx="1" fill="#53525d"/>
-              <rect x="14" y="35" width="26" height="2" rx="1" fill="#53525d"/>
-              <rect x="14" y="40" width="30" height="2" rx="1" fill="#53525d"/>
-              <rect x="14" y="48" width="20" height="2.5" rx="1" fill="#a3e635" opacity="0.4"/>
-            </svg>
-          </div>
-
-          <div class="viz-arrows">
-            <svg viewBox="0 0 80 120" width="64" height="96" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Arrow 1 (top) -->
-              <path d="M5 60 Q20 20, 70 15" stroke="#a3e635" stroke-width="1.5" fill="none" opacity="0.6"/>
-              <polygon points="70,11 78,15 70,19" fill="#a3e635" opacity="0.6"/>
-              <!-- Arrow 2 -->
-              <path d="M5 60 Q25 40, 70 42" stroke="#a3e635" stroke-width="1.5" fill="none" opacity="0.7"/>
-              <polygon points="70,38 78,42 70,46" fill="#a3e635" opacity="0.7"/>
-              <!-- Arrow 3 -->
-              <path d="M5 60 Q25 80, 70 78" stroke="#a3e635" stroke-width="1.5" fill="none" opacity="0.7"/>
-              <polygon points="70,74 78,78 70,82" fill="#a3e635" opacity="0.7"/>
-              <!-- Arrow 4 (bottom) -->
-              <path d="M5 60 Q20 100, 70 105" stroke="#a3e635" stroke-width="1.5" fill="none" opacity="0.6"/>
-              <polygon points="70,101 78,105 70,109" fill="#a3e635" opacity="0.6"/>
-            </svg>
-          </div>
-
-          <div class="viz-platforms">
+          <!-- Left platforms -->
+          <div class="viz-side">
             <!-- Mastodon -->
             <div class="viz-platform">
               <svg viewBox="0 0 74 79" width="28" height="30" xmlns="http://www.w3.org/2000/svg">
@@ -357,20 +329,55 @@
             <div class="viz-platform">
               <svg viewBox="0 0 256 256" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
                 <rect width="256" height="256" rx="50" fill="#8B5CF6"/>
-                <path d="M169.3 106.6c1.2 8.3-1.5 14.5-7.6 19.6-3.7 3.1-7.9 5.3-12.3 7.2-3 1.3-6 2.5-8.8 4.2-2.2 1.3-3.2 3.2-2.8 5.7.5 2.8 2.3 4.2 5 4.5 3.3.4 6.3-.7 9.2-2.1 7-3.5 12.4-8.8 15.8-15.9.5-1 1-2 1.7-3.3.3 1 .5 1.6.6 2.2 2.2 9.3-1.2 18.9-8.9 24.7-5.5 4.2-11.8 6.4-18.5 7.3-10 1.3-19.5-.3-27.7-6.6-6.3-4.8-9.7-11.3-10.5-19.2-1.3-12.2 2.8-22.3 12.2-30.2 6.8-5.7 14.8-8.8 23.5-10 6.4-.9 12.7-.7 18.6 2.2 5 2.4 8.5 6.2 10.5 11.7zm-28-3.5c-6 .4-11.4 2.3-16 6.1-6.6 5.5-9.3 12.6-8.2 21 .7 5.3 3.2 9.6 7.7 12.7 5 3.5 10.7 4.7 16.6 4.6.7 0 1-.3 1.2-1 .5-1.4.3-2.8-.7-3.8-1.4-1.5-3.2-2.1-5.2-2.2-3.3-.2-6.4-.9-9-3.2-3.1-2.7-4.1-6.2-3.5-10.2.7-5 3.5-8.5 8-10.8 3-1.5 6.2-2.3 9.5-2.6 2.8-.3 5.6-.2 8.2 1 1.3.6 2.4 1.5 2.5 3.1.2 1.5-.5 2.7-1.7 3.6-1.2.8-2.5 1.2-3.9 1.3-3 .3-5.8 1-8 3.3-1.4 1.5-2 3.2-1.2 5.3.3.8.1 1.2-.7 1.5-3 1.3-6.2 1.4-9.2.1-4.3-1.8-5.3-6.3-2.1-9.5 2.1-2.1 4.7-3.2 7.6-3.7 5.1-.8 10.1-.5 14.7 2.1 4 2.3 5.6 5.8 5 10.4-.3 2.3-1.5 4-3.5 5.3l-.6.3c-.3.2-.4.4-.2.7.7 1.5 2 2 3.5 2 2.6-.2 4.7-1.4 6.3-3.4 2.5-3.2 3-6.8 2.1-10.6-1.4-5.5-5.2-8.8-10.4-10.8-5.3-2.1-10.8-2.2-16.4-1.5l-2.1.3z" fill="white"/>
+                <text x="128" y="175" text-anchor="middle" font-family="serif" font-size="180" font-weight="bold" fill="white">n</text>
               </svg>
               <span>Nostr</span>
             </div>
+          </div>
+
+          <!-- Left arrows -->
+          <svg viewBox="0 0 70 90" width="56" height="72" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);">
+            <path d="M65 20 Q40 20, 5 45" stroke="#a3e635" stroke-width="2.5" fill="none" opacity="0.8"/>
+            <polygon points="5,40 0,45 5,50" fill="#a3e635" opacity="0.8"/>
+            <path d="M65 70 Q40 70, 5 45" stroke="#a3e635" stroke-width="2.5" fill="none" opacity="0.8"/>
+            <polygon points="5,40 0,45 5,50" fill="#a3e635" opacity="0.8"/>
+          </svg>
+
+          <!-- Phone -->
+          <div>
+            <svg viewBox="0 0 60 100" width="60" height="100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="2" width="56" height="96" rx="10" stroke="#89898f" stroke-width="2.5" fill="#1e1e28"/>
+              <rect x="8" y="14" width="44" height="64" rx="3" fill="#2a2a34"/>
+              <circle cx="30" cy="88" r="4" stroke="#89898f" stroke-width="1.5" fill="none"/>
+              <rect x="22" y="6" width="16" height="3" rx="1.5" fill="#53525d"/>
+              <rect x="14" y="24" width="28" height="2.5" rx="1" fill="#a3e635" opacity="0.7"/>
+              <rect x="14" y="30" width="32" height="2" rx="1" fill="#53525d"/>
+              <rect x="14" y="35" width="26" height="2" rx="1" fill="#53525d"/>
+              <rect x="14" y="40" width="30" height="2" rx="1" fill="#53525d"/>
+              <rect x="14" y="48" width="20" height="2.5" rx="1" fill="#a3e635" opacity="0.4"/>
+            </svg>
+          </div>
+
+          <!-- Right arrows -->
+          <svg viewBox="0 0 70 90" width="56" height="72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 45 Q30 20, 60 20" stroke="#a3e635" stroke-width="2.5" fill="none" opacity="0.8"/>
+            <polygon points="60,15 68,20 60,25" fill="#a3e635" opacity="0.8"/>
+            <path d="M5 45 Q30 70, 60 70" stroke="#a3e635" stroke-width="2.5" fill="none" opacity="0.8"/>
+            <polygon points="60,65 68,70 60,75" fill="#a3e635" opacity="0.8"/>
+          </svg>
+
+          <!-- Right platforms -->
+          <div class="viz-side">
             <!-- Bluesky -->
             <div class="viz-platform">
-              <svg viewBox="0 0 568 501" width="30" height="26" xmlns="http://www.w3.org/2000/svg">
+              <svg viewBox="0 0 568 501" width="28" height="25" xmlns="http://www.w3.org/2000/svg">
                 <path d="M123.121 33.664C188.241 82.553 258.281 181.68 284 234.873c25.719-53.192 95.759-152.32 160.879-201.21C491.866-1.611 568-28.906 568 57.947c0 17.346-9.945 145.713-15.778 166.555-20.275 72.453-94.155 90.933-159.875 79.748C507.222 323.8 536.444 388.56 473.333 453.32c-119.86 122.992-172.272-30.859-185.702-70.281-2.462-7.227-3.614-10.608-3.631-7.733-.017-2.875-1.169.506-3.631 7.733-13.43 39.422-65.842 193.273-185.702 70.281-63.111-64.76-33.89-129.52 80.986-149.07-65.72 11.185-139.6-7.295-159.875-79.748C9.945 203.659 0 75.291 0 57.946 0-28.906 76.135-1.612 123.121 33.664z" fill="#1185FE"/>
               </svg>
               <span>Bluesky</span>
             </div>
             <!-- Pubky -->
-            <div class="viz-platform">
-              <img src="pubky-logo.svg" alt="Pubky" style="height: 22px; width: auto;" />
+            <div class="viz-platform compact">
+              <img src="pubky-logo.svg" alt="Pubky" style="height: 18px; width: auto;" />
             </div>
           </div>
         </div>
@@ -383,7 +390,7 @@
       <section>
         <h2>Popularity: <span class="brand">Crossposters</span></h2>
         <div class="divider"></div>
-        <p>Used by agencies and individuals alike.</p>
+        <p>Popular amongst agencies <span class="brand">and individuals</span></p>
         <img src="crossposter-stats.png" alt="Social Media Aggregator & Management Solutions Growth (2020–2026)" style="max-width: 85%; border-radius: 10px; border: 1px solid var(--border); background: #fff;" />
       </section>
 
